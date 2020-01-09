@@ -1,16 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import discord
-from discord.ext import commands
-from discord.ext.commands import Bot
-from discord.utils import get
 
 _TOKEN = open("Token.txt").readline().rstrip()
 
-bot = commands.Bot(command_prefix='$')
 client = discord.Client()
 
-def welcome():
+def welcome(id):
 	return """
 	``` _______       .-''-.  ,---.    ,---.   ,---.  ,---..-./`) ,---.   .--. ______        ____
 \\  ____  \\   .'_ _   \\ |    \\  /    |   |   /  |   |\\ .-.')|    \\  |  ||    _ `''.  .'  __ `.  
@@ -22,9 +18,9 @@ def welcome():
 |  (_,_)  /  \\       / |  |      |  |     \\     /    |   | |  |    |  ||       .'  \\ (_ o _) / 
 /_______.'    `'-..-'  '--'      '--'      `---`     '---' '--'    '--''-----'`     '.(_,_).'
 ```
-**Sejam bem vindas ao TGalaxy Brasil!, cujo objetivo é reunir o máximo da comunidade Trans|Cross brasileira e criar um gratificanete laço social oωo✿.**
+**Seja bem vinda ao TGalaxy Brasil, <@$$$>! Nosso objetivo é reunir o máximo da comunidade Trans|Cross brasileira e criar um gratificanete laço social oωo✿.**
 
-Para acessar o restante do servidor, você deve publicar uma introdução antes de receber manualmente os devidos cargos de uma das @Princess.
+Para acessar o restante do servidor, você deve publicar uma introdução antes de receber manualmente os devidos cargos de uma das <@&664408571538309120>.
 Exemplo:
 
 Nome: Como deseja ser chamada aqui (Requerido)
@@ -33,15 +29,15 @@ Gênero: (Requerido)
 Gosta/não gosta: (Opcional)
 Estado ou país(caso não for daqui): (Requerido)
 Mais alguma outra coisa: (Opcional)
-	"""
+	""".replace("$$$", id)
 
-@bot.event
+@client.event
 async def on_ready():
-	print('We have logged in as {0.user.name}'.format(bot))
+	print('We have logged in as {0.user.name}'.format(client))
 
-@bot.event
+@client.event
 async def on_member_join(member):
-	target_channel = client.get_channel(664400035718496256)
-	await target_channel.send(welcome())
+	channel = client.get_channel(664400035718496256)
+	await channel.send(welcome(str(member.id)))
 
-bot.run(_TOKEN)
+client.run(_TOKEN)
