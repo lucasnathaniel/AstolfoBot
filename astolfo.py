@@ -41,13 +41,6 @@ async def on_ready():
 @bot.event
 async def on_member_join(member):
 	target_channel = bot.get_channel("664400035718496256")
-	await client.send_message(target_channel, welcome())
-
-@bot.command(pass_context=True)
-async def give_random_user(ctx):
-	msg = await ctx.send(get_random_user())
-	emoji = '\U0001F498'
-	await msg.add_reaction(emoji)
-
+	await target_channel.send(welcome())
 
 bot.run(_TOKEN)
