@@ -8,6 +8,7 @@ from discord.utils import get
 _TOKEN = open("Token.txt").readline().rstrip()
 
 bot = commands.Bot(command_prefix='$')
+client = discord.Client()
 
 def welcome():
 	return """
@@ -40,7 +41,7 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member):
-	target_channel = bot.get_channel("664400035718496256")
+	target_channel = client.get_channel("664400035718496256")
 	await target_channel.send(welcome())
 
 bot.run(_TOKEN)
