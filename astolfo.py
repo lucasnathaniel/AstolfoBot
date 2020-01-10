@@ -20,9 +20,9 @@ def welcome(id):
 |  (_,_)  /  \\       / |  |      |  |     \\     /    |   | |  |    |  ||       .'  \\ (_ o _) / 
 /_______.'    `'-..-'  '--'      '--'      `---`     '---' '--'    '--''-----'`     '.(_,_).'
 ```
-**Seja bem vinda ao TGalaxy Brasil, <@$$$>! Nosso objetivo é reunir o máximo da comunidade Trans|Cross brasileira e criar um gratificanete laço social oωo✿.**
+**Seja bem vinda ao TGalaxy Brasil, <@$$$>! Nosso objetivo é reunir o máximo da comunidade Trans|Cross brasileira e criar um lindo laço social oωo✿.**
 
-Para acessar o restante do servidor, você deve publicar uma introdução antes de receber manualmente os devidos cargos de uma das <@&664408571538309120>.
+Para acessar o restante do servidor, você deve publicar uma introdução e isso lhe dará acesso automaticamente!
 Exemplo:
 
 Nome: Como deseja ser chamada aqui (Requerido)
@@ -41,6 +41,12 @@ async def on_ready():
 async def on_member_join(member):
 	channel = bot.get_channel(664400035718496256)
 	await channel.send(welcome(str(member.id)))
+
+@bot.event
+async def on_message(message):
+	if message.channel.id == 664400035718496256 and len(message.author.roles) == 1:
+		lady_role = message.guild.get_role(664407928618483732)
+		await message.author.add_roles(lady_role)
 
 @bot.command(pass_context = True)
 async def mute(ctx, member : discord.Member = None):
