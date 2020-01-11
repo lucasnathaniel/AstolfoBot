@@ -44,9 +44,30 @@ async def on_member_join(member):
 
 @bot.event
 async def on_message(message):
-	if message.channel.id == 664400035718496256 and len(message.author.roles) == 1:
+	#Get Lady role
+	if message.channel.id == 664400035718496256 and len(message.author.roles) == 1 and len(message.content) > 20:
 		lady_role = message.guild.get_role(664407928618483732)
 		await message.author.add_roles(lady_role)
+	await bot.process_commands(message)
+
+@bot.command(pass_context = True)
+async def sou(ctx):
+	if ctx.channel.id == 665081142734749711:
+		print(f"Adicionando role para {ctx.author}")
+		for role in ctx.guild.roles:
+			if role.name == ctx.message.content.split()[1]:
+				if role.name in ["Queen", "Princess", "Astolfo", "DISBOARD.org", "Lady", "Lady silenciada", "@everyone"]:
+					await ctx.send(f"<@!{ctx.author.id}>, você não tem permissão pra isso, querida :/")
+					return
+				if role.name == "Trans":
+					role = ctx.guild.get_role(665070487000580099)
+				if role.name == "Trap/Cross":
+					role = ctx.guild.get_role(665070596455137302)
+				await ctx.author.add_roles(role)
+				await ctx.send(f"Tag {role.name} adicionada para <@!{ctx.author.id}>!")
+				return
+		await ctx.send(f"<@!{ctx.author.id}>, a tag {ctx.message.content.split()[1]} nao foi encontrada, querida :/")
+
 
 @bot.command(pass_context = True)
 async def mute(ctx, member : discord.Member = None):
