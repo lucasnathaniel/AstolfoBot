@@ -55,13 +55,14 @@ async def sou(ctx):
 	if ctx.channel.id == 665081142734749711:
 		print(f"Adicionando role para {ctx.author}")
 		for role in ctx.guild.roles:
-			if role.name == ctx.message.content.split()[1]:
-				if role.name in ["Queen", "Princess", "Astolfo", "DISBOARD.org", "Lady", "Lady silenciada", "@everyone"]:
+			name_role = role.name.lower()
+			if name_role == ctx.message.content.split()[1].lower():
+				if name_role in ["queen", "princess", "astolfo", "disboard.org", "lady", "lady silenciada", "@everyone"]:
 					await ctx.send(f"<@!{ctx.author.id}>, você não tem permissão pra isso, querida :/")
 					return
-				if role.name == "Trans":
+				if name_role == "trans":
 					role = ctx.guild.get_role(665070487000580099)
-				if role.name == "Trap/Cross":
+				if name_role == "trap/cross":
 					role = ctx.guild.get_role(665070596455137302)
 				await ctx.author.add_roles(role)
 				await ctx.send(f"Tag {role.name} adicionada para <@!{ctx.author.id}>!")
