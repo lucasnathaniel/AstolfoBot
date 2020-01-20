@@ -32,7 +32,7 @@ Gosta/não gosta: (Opcional)
 Estado ou país(caso não for daqui): (Requerido)
 Mais alguma outra coisa: (Opcional)
 
-OBS: Por obséquio, leia #regras-cargos, é rapidinho C:
+OBS: Por obséquio, leia <#664401311269257224>, é rapidinho C:
 	""".replace("$$$", id)
 
 @bot.event
