@@ -31,6 +31,8 @@ Gênero: (Requerido)
 Gosta/não gosta: (Opcional)
 Estado ou país(caso não for daqui): (Requerido)
 Mais alguma outra coisa: (Opcional)
+
+OBS: Por obséquio, leia #regras-cargos, é rapidinho C:
 	""".replace("$$$", id)
 
 @bot.event
