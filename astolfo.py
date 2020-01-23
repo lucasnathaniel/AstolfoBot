@@ -35,9 +35,17 @@ Mais alguma outra coisa: (Opcional)
 OBS: Por obséquio, leia <#664401311269257224>, é rapidinho C:
 	""".replace("$$$", id)
 
+def disboard(bot):
+	disboard_channel = bot.get_channel(669719596919554067)
+	duration = 7300
+	while 1:
+		await disboard_channel.send(welcome(str(member.id)))
+		await asyncio.sleep(duration)
+
 @bot.event
 async def on_ready():
 	print('We have logged in as {0.user.name}'.format(bot))
+	disboard(bot)
 
 @bot.event
 async def on_member_join(member):
