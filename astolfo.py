@@ -41,7 +41,7 @@ async def on_ready():
 	disboard_channel = bot.get_channel(669719596919554067)
 	duration = 7200
 	while 1:
-		await disboard_channel.send("<@&664408571538309120> querida, please digite !d bump C:")
+		await disboard_channel.send("<@&664408571538309120>, querida, please digite `!d bump` (Disboard) C:")
 		await asyncio.sleep(duration)
 
 @bot.event
