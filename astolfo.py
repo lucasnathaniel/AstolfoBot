@@ -2,6 +2,8 @@
 
 import discord
 import asyncio
+import random
+import re
 from discord.ext import commands
 
 _TOKEN = open("Token.txt").readline().rstrip()
@@ -38,11 +40,6 @@ OBS: Por obséquio, leia <#664401311269257224>, é rapidinho C:
 @bot.event
 async def on_ready():
 	print('We have logged in as {0.user.name}'.format(bot))
-	disboard_channel = bot.get_channel(669719596919554067)
-	duration = 7200
-	while 1:
-		await disboard_channel.send("<@&664408571538309120>, querida, please digite `!d bump` (Disboard) C:")
-		await asyncio.sleep(duration)
 
 @bot.event
 async def on_member_join(member):
@@ -51,6 +48,17 @@ async def on_member_join(member):
 
 @bot.event
 async def on_message(message):
+	#Roleplay
+	if "astolfo" in message.content.lower() and message.author.id != 664718856509718528:
+		message = random.choice(await message.channel.history(limit=1000).flatten())
+		await message.channel.send(re.sub('<@!.*?>',"querida",message.content, flags=re.DOTALL))
+	#Disboard message
+	if message.channel.id == 669719596919554067 and message.author.id == 302050872383242240 and "Bump done" in message.content:
+		disboard_channel = bot.get_channel(669719596919554067)
+		duration = 7200
+		await disboard_channel.send("Vou lembrar dentro de 2 horas (Disboard) C:")
+		await asyncio.sleep(duration)
+		await disboard_channel.send("<@&664408571538309120>, querida, please digite `!d bump` (Disboard) C:")
 	#Get Lady role
 	if message.channel.id == 664400035718496256 and len(message.author.roles) == 1 and len(message.content) > 20:
 		lady_role = message.guild.get_role(664407928618483732)
@@ -76,6 +84,9 @@ async def sou(ctx):
 				return
 		await ctx.send(f"<@!{ctx.author.id}>, a tag {ctx.message.content.split()[1]} nao foi encontrada, querida :/")
 
+@bot.command(pass_context = True)
+async def oi(ctx):
+	await ctx.send(f"Oi <@!{ctx.author.id}>!")
 
 @bot.command(pass_context = True)
 async def mute(ctx, member : discord.Member = None):
