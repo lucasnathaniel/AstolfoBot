@@ -53,11 +53,14 @@ async def on_message(message):
 		message = random.choice(await message.channel.history(limit=1000).flatten())
 		await message.channel.send(re.sub('<@!.*?>',"querida",message.content, flags=re.DOTALL))
 	#Disboard message
-	if message.channel.id == 669719596919554067 and message.author.id == 302050872383242240 and "Bump done" in message.embeds[0].description:
-		duration = 7200
-		await message.channel.send("Vou lembrar dentro de 2 horas (Disboard) C:")
-		await asyncio.sleep(duration)
-		await message.channel.send("<@&664408571538309120>, querida, please digite `!d bump` (Disboard) C:")
+	if message.channel.id == 669719596919554067 and message.author.id == 302050872383242240:
+		if "Bump done" in message.embeds[0].description:
+			duration = 7200
+			await message.channel.send("Vou lembrar dentro de 2 horas (Disboard) C:")
+			await asyncio.sleep(duration)
+			await message.channel.send("<@&664408571538309120>, querida, please digite `!d bump` (Disboard) C:")
+		elif "Please wait another" in message.embeds[0].description:
+			await message.channel.send("Espere mais um tempinho, jovem! (Disboard) :C")
 	#Get Lady role
 	if message.channel.id == 664400035718496256 and len(message.author.roles) == 1 and len(message.content) > 20:
 		lady_role = message.guild.get_role(664407928618483732)
