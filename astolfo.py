@@ -47,6 +47,16 @@ async def on_member_join(member):
 	await channel.send(welcome(str(member.id)))
 
 @bot.event
+async def on_member_ban(guild, member):
+	log_channel = bot.get_channel(670307380176879660)
+	await log_channel.send(f"{member} banido C:")
+
+@bot.event
+async def on_member_unban(guild, member):
+	log_channel = bot.get_channel(670307380176879660)
+	await log_channel.send(f"{member} desbanido C:")
+
+@bot.event
 async def on_message(message):
 	#Roleplay
 	if "astolfo" in message.content.lower() and message.author.id != 664718856509718528:
@@ -130,14 +140,16 @@ async def clear(ctx):
 	if 664408571538309120 in [role.id for role in ctx.author.roles]:
 		try:
 			number = int(ctx.message.content.split()[1])
-			if number >=1 and number <=50:
+			if number >=1 and number <=100:
+				log_channel = bot.get_channel(670307380176879660)
+				await log_channel.send(f"<@!{ctx.message.author.id}> deletou {number} mensagens no canal <#{ctx.channel.id}>")
 				for current_message in await ctx.channel.history(limit=number).flatten():
 					await current_message.delete()
 			else:
 				await ctx.send(f"<@!{ctx.message.author.id}>, querida, algo de errado nao esta certo :/. Use $clear <1-50>")
 		except Exception as ex:
 			print(ex)
-			await ctx.send(f"<@!{ctx.message.author.id}>, querida, algo de errado nao esta certo :/. Use $clear <1-50>")
+			await ctx.send(f"<@!{ctx.message.author.id}>, querida, algo de errado nao esta certo :/. Use $clear <1-100>")
 	else:
 		await ctx.send(f"<@!{ctx.message.author}>, Voce nao tem permissao, querida :/")
 
