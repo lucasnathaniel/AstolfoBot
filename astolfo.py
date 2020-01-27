@@ -84,13 +84,17 @@ async def sou(ctx):
 		for role in ctx.guild.roles:
 			name_role = role.name.lower()
 			if name_role == ctx.message.content.split()[1].lower():
-				if name_role in ["queen", "princess", "astolfo", "disboard.org", "lady", "lady silenciada", "@everyone"]:
+				if name_role in ["queen", "princess", "astolfo", "disboard.org", "plebeu", "lady silenciada", "@everyone"]:
 					await ctx.send(f"<@!{ctx.author.id}>, você não tem permissão pra isso, querida :/")
 					return
 				if name_role == "trans":
 					role = ctx.guild.get_role(665070487000580099)
-				if name_role == "trap/cross":
+				elif name_role == "trap/cross":
 					role = ctx.guild.get_role(665070596455137302)
+				elif name_role == "lady":
+					plebeu_role = ctx.guild.get_role(664407928618483732)
+					await ctx.author.remove_roles(plebeu_role)
+					role = ctx.guild.get_role(671230841812156446)
 				await ctx.author.add_roles(role)
 				await ctx.send(f"Tag {role.name} adicionada para <@!{ctx.author.id}>!")
 				return
@@ -100,40 +104,40 @@ async def sou(ctx):
 async def oi(ctx):
 	await ctx.send(f"Oi <@!{ctx.author.id}>!")
 #Muta o individuo
-@bot.command(pass_context = True)
-async def mute(ctx, member : discord.Member = None):
-	if 664408571538309120 in [role.id for role in ctx.author.roles]:
-		try:
-			silenced_role = ctx.guild.get_role(664927129204686848)
-			lady_role = ctx.guild.get_role(664407928618483732)
-			days = ctx.message.content.split()[2]
-			duration = int(days)*86400
-			await member.add_roles(silenced_role)
-			await member.remove_roles(lady_role)
-			await ctx.send(f"<@!{member}> silenciada por {days} dia(s)")
-			await asyncio.sleep(duration)
-			await member.remove_roles(silenced_role)
-			await member.add_roles(lady_role)
-		except Exception as ex:
-			print(ex)
-			await ctx.send(f"<@!{ctx.message.author.id}>, comando invalido, querida :/. Use $mute @member <1-7>")
-	else:
-		await ctx.send(f"<@!{ctx.message.author}>, Voce nao tem permissao, querida :/")
+#@bot.command(pass_context = True)
+#async def mute(ctx, member : discord.Member = None):
+#	if 664408571538309120 in [role.id for role in ctx.author.roles]:
+#		try:
+#			silenced_role = ctx.guild.get_role(664927129204686848)
+#			lady_role = ctx.guild.get_role(664407928618483732)
+#			days = ctx.message.content.split()[2]
+#			duration = int(days)*86400
+#			await member.add_roles(silenced_role)
+#			await member.remove_roles(lady_role)
+#			await ctx.send(f"<@!{member}> silenciada por {days} dia(s)")
+#			await asyncio.sleep(duration)
+#			await member.remove_roles(silenced_role)
+#			await member.add_roles(lady_role)
+#		except Exception as ex:
+#			print(ex)
+#			await ctx.send(f"<@!{ctx.message.author.id}>, comando invalido, querida :/. Use $mute @member <1-7>")
+#	else:
+#		await ctx.send(f"<@!{ctx.message.author}>, Voce nao tem permissao, querida :/")
 #Desmuta o individuo
-@bot.command(pass_context = True)
-async def unmute(ctx, member : discord.Member = None):
-	if 664408571538309120 in [role.id for role in ctx.author.roles]:
-		try:
-			silenced_role = ctx.guild.get_role(664927129204686848)
-			lady_role = ctx.guild.get_role(664407928618483732)
-			await ctx.send(f"<@!{member}>, agora voce pode falar, baby C:")
-			await member.remove_roles(silenced_role)
-			await member.add_roles(lady_role)
-		except Exception as ex:
-			print(ex)
-			await ctx.send(f"<@!{ctx.message.author.id}>, comando invalido, querida :/. Use $mute @member <1-7>")
-	else:
-		await ctx.send(f"<@!{ctx.message.author}>, Voce nao tem permissao, querida :/")
+#@bot.command(pass_context = True)
+#async def unmute(ctx, member : discord.Member = None):
+#	if 664408571538309120 in [role.id for role in ctx.author.roles]:
+#		try:
+#			silenced_role = ctx.guild.get_role(664927129204686848)
+#			lady_role = ctx.guild.get_role(664407928618483732)
+#			await ctx.send(f"<@!{member}>, agora voce pode falar, baby C:")
+#			await member.remove_roles(silenced_role)
+#			await member.add_roles(lady_role)
+#		except Exception as ex:
+#			print(ex)
+#			await ctx.send(f"<@!{ctx.message.author.id}>, comando invalido, querida :/. Use $mute @member <1-7>")
+#	else:
+#		await ctx.send(f"<@!{ctx.message.author}>, Voce nao tem permissao, querida :/")
 #Limpa as msg
 @bot.command(pass_context = True)
 async def clear(ctx):
