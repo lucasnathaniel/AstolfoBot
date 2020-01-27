@@ -66,7 +66,7 @@ async def on_message(message):
 		lady_role = message.guild.get_role(664407928618483732)
 		await message.author.add_roles(lady_role)
 	await bot.process_commands(message)
-
+#Atribuicao de roles
 @bot.command(pass_context = True)
 async def sou(ctx):
 	if ctx.channel.id == 665081142734749711:
@@ -85,11 +85,11 @@ async def sou(ctx):
 				await ctx.send(f"Tag {role.name} adicionada para <@!{ctx.author.id}>!")
 				return
 		await ctx.send(f"<@!{ctx.author.id}>, a tag {ctx.message.content.split()[1]} nao foi encontrada, querida :/")
-
+#Checka se o bot ta on
 @bot.command(pass_context = True)
 async def oi(ctx):
 	await ctx.send(f"Oi <@!{ctx.author.id}>!")
-
+#Muta o individuo
 @bot.command(pass_context = True)
 async def mute(ctx, member : discord.Member = None):
 	if 664408571538309120 in [role.id for role in ctx.author.roles]:
@@ -109,7 +109,7 @@ async def mute(ctx, member : discord.Member = None):
 			await ctx.send(f"<@!{ctx.message.author.id}>, comando invalido, querida :/. Use $mute @member <1-7>")
 	else:
 		await ctx.send(f"<@!{ctx.message.author}>, Voce nao tem permissao, querida :/")
-
+#Desmuta o individuo
 @bot.command(pass_context = True)
 async def unmute(ctx, member : discord.Member = None):
 	if 664408571538309120 in [role.id for role in ctx.author.roles]:
@@ -122,6 +122,22 @@ async def unmute(ctx, member : discord.Member = None):
 		except Exception as ex:
 			print(ex)
 			await ctx.send(f"<@!{ctx.message.author.id}>, comando invalido, querida :/. Use $mute @member <1-7>")
+	else:
+		await ctx.send(f"<@!{ctx.message.author}>, Voce nao tem permissao, querida :/")
+#Limpa as msg
+@bot.command(pass_context = True)
+async def clear(ctx):
+	if 664408571538309120 in [role.id for role in ctx.author.roles]:
+		try:
+			number = int(ctx.message.content.split()[1])
+			if number >=1 and number <=50:
+				for current_message in await ctx.channel.history(limit=number).flatten():
+					await current_message.delete()
+			else:
+				await ctx.send(f"<@!{ctx.message.author.id}>, querida, algo de errado nao esta certo :/. Use $clear <1-50>")
+		except Exception as ex:
+			print(ex)
+			await ctx.send(f"<@!{ctx.message.author.id}>, querida, algo de errado nao esta certo :/. Use $clear <1-50>")
 	else:
 		await ctx.send(f"<@!{ctx.message.author}>, Voce nao tem permissao, querida :/")
 
