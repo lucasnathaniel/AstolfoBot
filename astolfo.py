@@ -96,7 +96,7 @@ async def sou(ctx):
 					await ctx.author.remove_roles(plebeu_role)
 					role = ctx.guild.get_role(671230841812156446)
 				if role in ctx.author.roles:
-					await ctx.send(f"<@!{ctx.author.id}>!, voce já tem a tag {role.name}, por favor não canse minha beleza! :C")
+					await ctx.send(f"<@!{ctx.author.id}>!, você já tem a tag {role.name}, por favor não canse minha beleza! :C")
 				else:
 					await ctx.author.add_roles(role)
 					await ctx.send(f"Tag {role.name} adicionada para <@!{ctx.author.id}>!")
@@ -108,10 +108,12 @@ async def naosou(ctx):
 		print(f"Adicionando role para {ctx.author}")
 		for role in ctx.author.roles:
 			if role.name.lower() == ctx.message.content.split()[1].lower():
-				if role.name.lower() not in ["queen", "princess", "astolfo", "disboard.org", "plebeu", "lady", "lady silenciada"]:
-				await ctx.author.remove_roles(role)
-				await ctx.send(f"Tag {role.name} removida de <@!{ctx.author.id}>!")
-				return
+				if role.name.lower() in ["queen", "princess", "astolfo", "disboard.org", "plebeu", "lady", "lady silenciada"]:
+					await ctx.send(f"<@!{ctx.author.id}>!, você não pode remover a tag {role.name}, por favor não canse minha beleza! :C")
+				else:
+					await ctx.author.remove_roles(role)
+					await ctx.send(f"Tag {role.name} removida de <@!{ctx.author.id}>!")
+					return
 		await ctx.send(f"<@!{ctx.author.id}>, a tag {ctx.message.content.split()[1]} nao foi encontrada, querida :/")
 #Checka se o bot ta on
 @bot.command(pass_context = True)
