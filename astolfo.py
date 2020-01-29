@@ -120,6 +120,13 @@ async def naosou(ctx):
 @bot.command(pass_context = True)
 async def oi(ctx):
 	await ctx.send(f"Oi <@!{ctx.author.id}>!")
+#Roll percentual
+@bot.command(pass_context = True)
+async def roll(ctx):
+	if ctx.message.content.split()[1].isdigit():
+		await.ctx.send(f"{random.randint(0, min(int(ctx.message.content.split()[1]), sys.maxsize))}")
+	else:
+		await.ctx.send(f"{random.randint(0, 100)}")
 #Muta o individuo
 #@bot.command(pass_context = True)
 #async def mute(ctx, member : discord.Member = None):
