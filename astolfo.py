@@ -4,6 +4,7 @@ import discord
 import asyncio
 import random
 import re
+import hashlib
 from discord.ext import commands
 
 _TOKEN = open("Token.txt").readline().rstrip()
@@ -123,10 +124,12 @@ async def oi(ctx):
 #Roll percentual
 @bot.command(pass_context = True)
 async def roll(ctx):
-	if ctx.message.content.split()[1].isdigit():
-		await.ctx.send(f"{random.randint(0, min(int(ctx.message.content.split()[1]), sys.maxsize))}")
-	else:
-		await.ctx.send(f"{random.randint(0, 100)}")
+	conteudo = ctx.message.content
+	if len(conteudo.split()) > 1:
+		if conteudo.split()[1].isdigit():
+			await ctx.send(f"{random.randint(0, min(int(conteudo.split()[1]), 2147483647))}")
+			return
+	await ctx.send(int(hashlib.md5(conteudo.encode('utf-8')).hexdigest()[0:2], 16)%101)
 #Muta o individuo
 #@bot.command(pass_context = True)
 #async def mute(ctx, member : discord.Member = None):
