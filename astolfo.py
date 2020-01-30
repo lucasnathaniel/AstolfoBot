@@ -41,6 +41,7 @@ OBS: Por obséquio, leia <#664401311269257224>, é rapidinho C:
 @bot.event
 async def on_ready():
 	print('We have logged in as {0.user.name}'.format(bot))
+	print(re.sub('<@!.*?>',"querida","oi <@!229759671039164416>", flags=re.DOTALL))
 
 @bot.event
 async def on_member_join(member):
@@ -61,8 +62,9 @@ async def on_member_unban(guild, member):
 async def on_message(message):
 	#Roleplay
 	if "astolfo" in message.content.lower() and message.author.id != 664718856509718528:
-		message = random.choice(await message.channel.history(limit=1000).flatten())
-		await message.channel.send(re.sub('<@!.*?>',"querida",message.content, flags=re.DOTALL))
+		selected_message = random.choice(await message.channel.history(limit=1000).flatten())
+		print(selected_message.content)
+		await message.channel.send(re.sub('<@!.*?>',"querida",selected_message.content, flags=re.DOTALL))
 	#Disboard message
 	if message.channel.id == 669719596919554067 and message.author.id == 302050872383242240:
 		if "Bump done" in message.embeds[0].description:
