@@ -62,9 +62,9 @@ async def on_member_unban(guild, member):
 async def on_message(message):
 	#Roleplay
 	if "astolfo" in message.content.lower() and message.author.id != 664718856509718528:
-		selected_message = random.choice(await message.channel.history(limit=1000).flatten())
+		selected_message = random.choice(await message.channel.history(limit=1500).flatten())
 		print(selected_message.content)
-		await message.channel.send(re.sub('<@!.*?>',"querida",selected_message.content, flags=re.DOTALL))
+		await message.channel.send(re.sub('<@.*?>',"querida",selected_message.content, flags=re.DOTALL))
 	#Disboard message
 	if message.channel.id == 669719596919554067 and message.author.id == 302050872383242240:
 		if "Bump done" in message.embeds[0].description:
