@@ -87,7 +87,10 @@ async def sou(ctx):
 		for role in ctx.guild.roles:
 			name_role = role.name.lower()
 			if name_role == ctx.message.content.split()[1].lower():
-				if name_role in ["queen", "princess", "astolfo", "disboard.org", "plebeu", "lady silenciada", "@everyone"]:
+				if name_role == "nsfw" and ctx.guild.get_role(673947486804639765) in ctx.author.roles:
+					await ctx.send(f"<@!{ctx.author.id}>, você não tem permissão pra isso, querida, volte quando você for mais velha :/")
+					return
+				if name_role in ["queen", "princess", "astolfo", "disboard.org", "plebeu", "lady silenciada", "@everyone", "menor"]:
 					await ctx.send(f"<@!{ctx.author.id}>, você não tem permissão pra isso, querida :/")
 					return
 				if name_role == "trans":
