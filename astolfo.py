@@ -103,6 +103,7 @@ async def sou(ctx):
 					role = ctx.guild.get_role(671230841812156446)
 				if role in ctx.author.roles:
 					await ctx.send(f"<@!{ctx.author.id}>!, você já tem a tag `{role.name}`, por favor não canse minha beleza! :C")
+					return
 				else:
 					await ctx.author.add_roles(role)
 					await ctx.send(f"Tag `{role.name}` adicionada para <@!{ctx.author.id}>!")
@@ -134,7 +135,7 @@ async def roll(ctx):
 		if conteudo.split()[1].isdigit():
 			await ctx.send(f"{random.randint(0, min(int(conteudo.split()[1]), 2147483647))}")
 			return
-	await ctx.send(int(hashlib.md5(conteudo.encode('utf-8')).hexdigest()[0:2], 16)%101)
+	await ctx.send(f"{int(hashlib.md5(conteudo.encode('utf-8')).hexdigest()[0:2], 16)%101}%")
 #Muta o individuo
 #@bot.command(pass_context = True)
 #async def mute(ctx, member : discord.Member = None):
