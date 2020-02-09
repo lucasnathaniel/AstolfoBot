@@ -139,10 +139,10 @@ async def roll(ctx):
 
 @bot.command(pass_context = True)
 async def video(ctx):
-	channels = (c.name for c in ctx.message.server.channels if c.type==ChannelType.voice)
+	channels = ctx.guild.voice_channels
 	for channel in channels:
-		if ctx.author in channel.members:
-			embed=discord.Embed(title="Astolfo - Canal de Vídeo", description=f"Clique [aqui](https://discordapp.com/channels/{ctx.guild.id}/{ctx.member.channel.id}) para entrar no canal de vídeo de seu canal de voz.")
+		if ctx.message.author in channel.members:
+			embed=discord.Embed(title="Astolfo - Canal de Vídeo", description=f"Clique [aqui](https://discordapp.com/channels/{ctx.guild.id}/{channel.id}) para entrar no canal de vídeo de seu canal de voz.")
 			await ctx.send(embed=embed)
 			return
 	await ctx.send(f"<@!{ctx.author.id}> Você não está em um canal de voz, querida")
