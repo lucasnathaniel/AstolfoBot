@@ -136,6 +136,16 @@ async def roll(ctx):
 			await ctx.send(f"{random.randint(0, min(int(conteudo.split()[1]), 2147483647))}")
 			return
 	await ctx.send(f"{int(hashlib.md5(conteudo.encode('utf-8')).hexdigest()[0:2], 16)%101}%")
+
+@bot.command(pass_context = True)
+async def video(ctx):
+	channels = (c.name for c in ctx.message.server.channels if c.type==ChannelType.voice)
+	for channel in channels:
+		if ctx.author in channel.members:
+			embed=discord.Embed(title="Astolfo - Canal de Vídeo", description=f"Clique [aqui](https://discordapp.com/channels/{ctx.guild.id}/{ctx.member.channel.id}) para entrar no canal de vídeo de seu canal de voz.")
+			await ctx.send(embed=embed)
+			return
+	await ctx.send(f"<@!{ctx.author.id}> Você não está em um canal de voz, querida")
 #Muta o individuo
 #@bot.command(pass_context = True)
 #async def mute(ctx, member : discord.Member = None):
