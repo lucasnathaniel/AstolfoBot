@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+#embed
+#https://cog-creators.github.io/discord-embed-sandbox/
 import discord
 import asyncio
 import random
