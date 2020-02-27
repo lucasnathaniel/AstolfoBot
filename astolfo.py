@@ -8,7 +8,6 @@ import random
 import re
 import hashlib
 from discord.ext import commands
-from util.keep_alive import keep_alive
 
 bot = commands.Bot(command_prefix='$')
 
