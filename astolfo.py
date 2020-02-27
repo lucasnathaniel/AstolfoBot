@@ -204,12 +204,6 @@ async def clear(ctx):
 
 
 def main():
-    """ Main
-
-    Main of the bot. Start the webserver (in order to keep the bot alive), and 
-    start the Discord Client.
-    """
-    keep_alive()
     _TOKEN = open("Token.txt").readline().rstrip()
     bot.run(_TOKEN)
 
