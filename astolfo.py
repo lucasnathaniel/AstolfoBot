@@ -8,8 +8,7 @@ import random
 import re
 import hashlib
 from discord.ext import commands
-
-_TOKEN = open("Token.txt").readline().rstrip()
+from util.keep_alive import keep_alive
 
 bot = commands.Bot(command_prefix='$')
 
@@ -203,4 +202,16 @@ async def clear(ctx):
 	else:
 		await ctx.send(f"<@!{ctx.message.author}>, Voce nao tem permissao, querida :/")
 
-bot.run(_TOKEN)
+
+def main():
+    """ Main
+
+    Main of the bot. Start the webserver (in order to keep the bot alive), and 
+    start the Discord Client.
+    """
+    keep_alive()
+    _TOKEN = open("Token.txt").readline().rstrip()
+    bot.run(_TOKEN)
+
+if __name__ == "__main__":
+    main()
