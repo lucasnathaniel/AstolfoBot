@@ -42,6 +42,7 @@ OBS: Por obséquio, leia <#664401311269257224>, é rapidinho C:
 
 @bot.event
 async def on_ready():
+	print("Discord Version:",discord.__version__)
 	print('We have logged in as {0.user.name}'.format(bot))
 	print(re.sub('<@!.*?>',"querida","oi <@!229759671039164416>", flags=re.DOTALL))
 
